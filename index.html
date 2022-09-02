@@ -164,6 +164,7 @@
   <template id="template-app-password-form-range">
     <style>
       :host {
+        --thumb-size: 1.75rem;
         box-sizing: border-box;
         display: block;
         margin-bottom: 2rem;
@@ -186,112 +187,88 @@
         font-size: 1.5rem;
         color: var(--color-neon-green);
       }
-      .range__input {
-        -webkit-appearance: none;
+      .range__track {
+        position: relative;
         width: 100%;
-        background-color: transparent;
+        height: 0.5rem;
+        background-color: var(--color-very-dark-grey);
       }
-      .range__input::-webkit-slider-thumb {
+      .range__input {
+        margin: 0;
+        position: absolute;
+        z-index: 100;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: translateY(-50%);
+        opacity: 0.4;
         -webkit-appearance: none;
+        background-color: transparent;
       }
       .range__input:focus {
         outline: none;
       }
+      .range__input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+      }
       .range__input::-ms-track {
         width: 100%;
         cursor: pointer;
-        background-color: transparent; 
+        background: transparent; 
         border-color: transparent;
         color: transparent;
       }
       .range__input::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        height: 1.75rem;
-        width: 1.75rem;
+        width: var(--thumb-size);
+        height: var(--thumb-size);
         border-radius: 9999px;
-        background-color: var(--color-grey);
-        cursor: pointer;
-        margin-top: -0.75rem;
+        background-color: red;
       }
       .range__input::-moz-range-thumb {
-        height: 1.75rem;
-        width: 1.75rem;
+        width: var(--thumb-size);
+        height: var(--thumb-size);
         border-radius: 9999px;
-        background-color: var(--color-grey);
-        cursor: pointer;
       }
       .range__input::-ms-thumb {
-        height: 1.75rem;
-        width: 1.75rem;
+        width: var(--thumb-size);
+        height: var(--thumb-size);
+        border-radius: 9999px;
+      }
+      .range__thumb {
+        position: absolute;
+        z-index: 20;
+        top: -0.625rem;
+        left: 0;
+        width: var(--thumb-size);
+        height: var(--thumb-size);
         border-radius: 9999px;
         background-color: var(--color-grey);
-        cursor: pointer;
+        transform: translateX(8.84375rem);
       }
-      input[type=range]::-webkit-slider-runnable-track {
+      .range__progress {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 8.4px;
-        cursor: pointer;
-        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-        background: #3071a9;
-        border-radius: 1.3px;
-        border: 0.2px solid #010101;
-      }
-      input[type=range]:focus::-webkit-slider-runnable-track {
-        background: #367ebd;
-      }
-      input[type=range]::-moz-range-track {
-        width: 100%;
-        height: 8.4px;
-        cursor: pointer;
-        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-        background: #3071a9;
-        border-radius: 1.3px;
-        border: 0.2px solid #010101;
-      }
-      input[type=range]::-ms-track {
-        width: 100%;
-        height: 8.4px;
-        cursor: pointer;
-        background: transparent;
-        border-color: transparent;
-        border-width: 16px 0;
-        color: transparent;
-      }
-      input[type=range]::-ms-fill-lower {
-        background: #2a6495;
-        border: 0.2px solid #010101;
-        border-radius: 2.6px;
-        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-      }
-      input[type=range]:focus::-ms-fill-lower {
-        background: #3071a9;
-      }
-      input[type=range]::-ms-fill-upper {
-        background: #3071a9;
-        border: 0.2px solid #010101;
-        border-radius: 2.6px;
-        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-      }
-      input[type=range]:focus::-ms-fill-upper {
-        background: #367ebd;
+        height: 100%;
+        background-color: var(--color-neon-green);
+        transform-origin: left;
+        transform: scaleX(0.5);
       }
     </style>
-    <label class="range">
-      <span class="range__row">
-        <span class="range__title">
-          <slot></slot>
-        </span>
-        <span class="range__max">10</span>
-      </span>
-      <input
-        class="range__input"
-        type="range"
-        min="0"
-        max="20"
-        step="1"
-        name=""
-      />
-    </label>
+    <div class="range">
+      <div class="range__row">
+        <p class="range__title"><slot></slot></p>
+        <p class="range__max">10</p>
+      </div>
+      <div class="range__track">
+        <input class="range__input" type="range" min="0" max="20" step="1" name="" />
+        <div class="range__thumb"></div>
+        <div class="range__progress"></div>
+      </div>
+    </div>
   </template>
 
   <!-- template | app password form checkbox -->
