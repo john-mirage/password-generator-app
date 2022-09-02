@@ -28,18 +28,408 @@
 
 <body class="page">
   <!-- app -->
-  <app-password-generator>
-    
-  </app-password-generator>
+  <app-password-generator></app-password-generator>
 
   <!-- template | app password generator -->
   <template id="template-app-password-generator">
     <style>
-
+      :host {
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        max-width: 33.75rem;
+      }
+      .title {
+        margin-bottom: 1rem;
+        text-align: center;
+        font-size: 1rem;
+        line-height: 1.3125rem;
+        color: var(--color-grey);
+      }
     </style>
-    <main>
-
+    <main class="container">
+      <h1 class="title">Password Generator</h1>
+      <app-password-display></app-password-display>
+      <app-password-form></app-password-form>
     </main>
+  </template>
+
+  <!-- template | app password display -->
+  <template id="template-app-password-display">
+    <style>
+      :host {
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        height: 4rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        background-color: var(--color-dark-grey);
+      }
+      .container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+      .password {
+        flex: 1;
+        font-size: 1.5rem;
+        color: var(--color-almost-white);
+        opacity: 0.25;
+      }
+      .button {
+        flex: none;
+        margin-right: -0.875rem;
+        display: flex;
+        width: 3rem;
+        height: 3rem;
+        padding: 0;
+        background-color: transparent;
+        border: none;
+      }
+      .icon {
+        margin: auto;
+        width: auto;
+        height: 1.25rem;
+        color: var(--color-neon-green);
+      }
+    </style>
+    <div class="container">
+      <p class="password">P4$5W0rD!</p>
+      <button class="button">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 24" fill="currentColor">
+          <path d="M20.341 3.091 17.909.659A2.25 2.25 0 0 0 16.319 0H8.25A2.25 2.25 0 0 0 6 2.25V4.5H2.25A2.25 2.25 0 0 0 0 6.75v15A2.25 2.25 0 0 0 2.25 24h10.5A2.25 2.25 0 0 0 15 21.75V19.5h3.75A2.25 2.25 0 0 0 21 17.25V4.682a2.25 2.25 0 0 0-.659-1.591ZM12.469 21.75H2.53a.281.281 0 0 1-.281-.281V7.03a.281.281 0 0 1 .281-.281H6v10.5a2.25 2.25 0 0 0 2.25 2.25h4.5v1.969a.282.282 0 0 1-.281.281Zm6-4.5H8.53a.281.281 0 0 1-.281-.281V2.53a.281.281 0 0 1 .281-.281H13.5v4.125c0 .621.504 1.125 1.125 1.125h4.125v9.469a.282.282 0 0 1-.281.281Zm.281-12h-3v-3h.451c.075 0 .147.03.2.082L18.667 4.6a.283.283 0 0 1 .082.199v.451Z"/>
+        </svg>
+      </button>
+    </div>
+  </template>
+
+  <!-- template | app password form -->
+  <template id="template-app-password-form">
+    <style>
+      :host {
+        box-sizing: border-box;
+        display: block;
+        margin-top: 1rem;
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        background-color: var(--color-dark-grey);
+      }
+      .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 3.5rem;
+        padding: 0;
+        background-color: var(--color-neon-green);
+        border: none;
+      }
+      .button__label {
+        margin-right: 1rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        color: var(--color-dark-grey);
+      }
+      .button__icon {
+        width: 0.75rem;
+        height: 0.75rem;
+        color: var(--color-dark-grey);
+      }
+    </style>
+    <form class="form">
+      <input class="input" type="hidden"/>
+      <input class="input" type="hidden"/>
+      <input class="input" type="hidden"/>
+      <input class="input" type="hidden"/>
+      <input class="input" type="hidden"/>
+      <app-password-form-range>Character Length</app-password-form-range>
+      <app-password-form-checkbox>Include Uppercase Letters</app-password-form-checkbox>
+      <app-password-form-checkbox>Include Lowercase Letters</app-password-form-checkbox>
+      <app-password-form-checkbox>Include Numbers</app-password-form-checkbox>
+      <app-password-form-checkbox>Include Symbols</app-password-form-checkbox>
+      <app-password-strength></app-password-strength>
+      <button class="button">
+        <span class="button__label">generate</span>
+        <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="currentColor">
+          <path d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z"/>
+        </svg>
+      </button>
+    </form>
+  </template>
+
+  <!-- template | app password form range -->
+  <template id="template-app-password-form-range">
+    <style>
+      :host {
+        box-sizing: border-box;
+        display: block;
+        margin-bottom: 2rem;
+      }
+      .range {
+        width: 100%;
+        height: auto;
+      }
+      .range__row {
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .range__title {
+        font-size: 1rem;
+        color: var(--color-almost-white);
+      }
+      .range__max {
+        font-size: 1.5rem;
+        color: var(--color-neon-green);
+      }
+      .range__input {
+        -webkit-appearance: none;
+        width: 100%;
+        background-color: transparent;
+      }
+      .range__input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+      }
+      .range__input:focus {
+        outline: none;
+      }
+      .range__input::-ms-track {
+        width: 100%;
+        cursor: pointer;
+        background-color: transparent; 
+        border-color: transparent;
+        color: transparent;
+      }
+      .range__input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 9999px;
+        background-color: var(--color-grey);
+        cursor: pointer;
+        margin-top: -0.75rem;
+      }
+      .range__input::-moz-range-thumb {
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 9999px;
+        background-color: var(--color-grey);
+        cursor: pointer;
+      }
+      .range__input::-ms-thumb {
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 9999px;
+        background-color: var(--color-grey);
+        cursor: pointer;
+      }
+      input[type=range]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        background: #3071a9;
+        border-radius: 1.3px;
+        border: 0.2px solid #010101;
+      }
+      input[type=range]:focus::-webkit-slider-runnable-track {
+        background: #367ebd;
+      }
+      input[type=range]::-moz-range-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        background: #3071a9;
+        border-radius: 1.3px;
+        border: 0.2px solid #010101;
+      }
+      input[type=range]::-ms-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        background: transparent;
+        border-color: transparent;
+        border-width: 16px 0;
+        color: transparent;
+      }
+      input[type=range]::-ms-fill-lower {
+        background: #2a6495;
+        border: 0.2px solid #010101;
+        border-radius: 2.6px;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+      }
+      input[type=range]:focus::-ms-fill-lower {
+        background: #3071a9;
+      }
+      input[type=range]::-ms-fill-upper {
+        background: #3071a9;
+        border: 0.2px solid #010101;
+        border-radius: 2.6px;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+      }
+      input[type=range]:focus::-ms-fill-upper {
+        background: #367ebd;
+      }
+    </style>
+    <label class="range">
+      <span class="range__row">
+        <span class="range__title">
+          <slot></slot>
+        </span>
+        <span class="range__max">10</span>
+      </span>
+      <input
+        class="range__input"
+        type="range"
+        min="0"
+        max="20"
+        step="1"
+        name=""
+      />
+    </label>
+  </template>
+
+  <!-- template | app password form checkbox -->
+  <template id="template-app-password-form-checkbox">
+    <style>
+      :host {
+        box-sizing: border-box;
+        display: block;
+      }
+      .checkbox {
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        cursor: pointer;
+      }
+      .checkbox__input {
+        display: none;
+      }
+      .checkbox__box {
+        margin-right: 1.25rem;
+        margin-left: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+        display: flex;
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 0.125rem solid var(--color-almost-white);
+      }
+      .checkbox__icon {
+        margin: auto;
+        width: 0.875rem;
+        height: 0.875rem;
+        color: var(--color-very-dark-grey);
+      }
+      .checkbox__label {
+        font-size: 1rem;
+        color: var(--color-almost-white);
+      }
+      .checkbox__input:checked ~ .checkbox__box {
+        border: none;
+        background-color: var(--color-neon-green);
+      }
+    </style>
+    <label class="checkbox">
+      <input class="checkbox__input" type="checkbox" name="">
+      <span class="checkbox__box">
+        <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" stroke="currentColor">
+          <path stroke-width="3" fill="none" d="M1 5.607 4.393 9l8-8"/>
+        </svg>
+      </span>
+      <span class="checkbox__label">
+        <slot></slot>
+      </span>
+    </label>
+  </template>
+
+  <!-- template | app password strength -->
+  <template id="template-app-password-strength">
+    <style>
+      :host {
+        box-sizing: border-box;
+        display: block;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        width: 100%;
+        height: auto;
+        background-color: var(--color-very-dark-grey);
+      }
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+        min-height: 3.5rem;
+        padding: 0.5rem 1rem;
+      }
+      .label {
+        margin-bottom: 1rem;
+        margin-right: 1rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        color: var(--color-grey);
+      }
+      .strength {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      .strength__value {
+        margin-right: 1rem;
+        font-size: 1.125rem;
+        text-transform: uppercase;
+        color: var(--color-almost-white);
+      }
+      .strength__bars {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+        width: 4rem;
+        height: 1.75rem;
+      }
+      .strength__bar {
+        width: 100%;
+        height: 100%;
+        border: 0.125rem solid var(--color-almost-white);
+      }
+      .strength__bar--red {
+        border: none;
+        background-color: var(--color-red);
+      }
+      .strength__bar--yellow {
+        border: none;
+        background-color: var(--color-yellow);
+      }
+      .strength__bar--green {
+        border: none;
+        background-color: var(--color-green);
+      }
+      @media screen and (min-width: 334px) {
+        .label {
+          margin-bottom: 0;
+        }
+      }
+    </style>
+    <div class="container">
+      <p class="label">strength</p>
+      <div class="strength">
+        <p class="strength__value">medium</p>
+        <div class="strength__bars">
+          <div class="strength__bar strength__bar--yellow"></div>
+          <div class="strength__bar strength__bar--yellow"></div>
+          <div class="strength__bar strength__bar--yellow"></div>
+          <div class="strength__bar"></div>
+        </div>
+      </div>
+    </div>
   </template>
 
   <!-- module -->

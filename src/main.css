@@ -1,5 +1,3 @@
-@import "styles/reset.css";
-
 @import "styles/components/page.css";
 
 @font-face {
@@ -16,15 +14,6 @@
    --color-yellow: hsl(42, 91%, 68%);
    --color-orange: hsl(13, 95%, 66%);
    --color-red: hsl(0, 91%, 63%);
-
-   --font-title-size: 2rem;
-   --font-title-height: 2.6875rem;
-
-   --font-subtitle-size: 1.5rem;
-   --font-subtitle-height: 1.9375rem;
-
-   --font-body-size: 1.125rem;
-   --font-body-height: 1.4375rem;
 }
 
 body {
