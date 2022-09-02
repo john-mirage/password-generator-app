@@ -297,10 +297,7 @@
         border: 0.125rem solid var(--color-almost-white);
       }
       .checkbox__icon {
-        margin: auto;
-        width: 0.875rem;
-        height: 0.875rem;
-        color: var(--color-very-dark-grey);
+        display: none;
       }
       .checkbox__label {
         font-size: 1rem;
@@ -309,6 +306,13 @@
       .checkbox__input:checked ~ .checkbox__box {
         border: none;
         background-color: var(--color-neon-green);
+      }
+      .checkbox__input:checked ~ .checkbox__box > .checkbox__icon {
+        display: block;
+        margin: auto;
+        width: 0.875rem;
+        height: 0.875rem;
+        color: var(--color-very-dark-grey);
       }
     </style>
     <label class="checkbox">
