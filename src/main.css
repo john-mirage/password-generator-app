@@ -2,6 +2,11 @@
 
 @import "styles/components/page.css";
 
+@font-face {
+  font-family: "JetBrains Mono Bold";
+  src: url("/src/fonts/JetBrainsMono-Bold.woff2") format("woff2");
+}
+
 :root {
    --color-very-dark-grey: hsl(248, 15%, 11%);
    --color-dark-grey: hsl(247, 11%, 15%);
@@ -11,4 +16,27 @@
    --color-yellow: hsl(42, 91%, 68%);
    --color-orange: hsl(13, 95%, 66%);
    --color-red: hsl(0, 91%, 63%);
+
+   --font-title-size: 2rem;
+   --font-title-height: 2.6875rem;
+
+   --font-subtitle-size: 1.5rem;
+   --font-subtitle-height: 1.9375rem;
+
+   --font-body-size: 1.125rem;
+   --font-body-height: 1.4375rem;
+}
+
+body {
+  font-family:
+    "JetBrains Mono Bold",
+    system-ui,
+		-apple-system,
+		'Segoe UI',
+		Roboto,
+		Helvetica,
+		Arial,
+		sans-serif,
+		'Apple Color Emoji',
+		'Segoe UI Emoji';
 }
