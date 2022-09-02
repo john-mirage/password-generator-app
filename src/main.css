@@ -1,0 +1,14 @@
+@import "styles/reset.css";
+
+@import "styles/components/page.css";
+
+:root {
+   --color-very-dark-grey: hsl(248, 15%, 11%);
+   --color-dark-grey: hsl(247, 11%, 15%);
+   --color-grey: hsl(251, 9%, 53%);
+   --color-almost-white: hsl(252, 11%, 91%);
+   --color-neon-green: hsl(127, 100%, 82%);
+   --color-yellow: hsl(42, 91%, 68%);
+   --color-orange: hsl(13, 95%, 66%);
+   --color-red: hsl(0, 91%, 63%);
+}
