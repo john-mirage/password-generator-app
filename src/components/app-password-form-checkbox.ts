@@ -17,6 +17,14 @@ class AppPasswordFormCheckbox extends HTMLElement {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  get name(): string {
+    return this.getAttribute("name") || "";
+  }
+
+  set name(newName: string) {
+    this.setAttribute("name", newName);
+  }
+
   get checked(): boolean {
     return this.getAttribute("checked") !== null;
   }
@@ -34,7 +42,7 @@ class AppPasswordFormCheckbox extends HTMLElement {
   }
 
   connectedCallback() {
-    this.checked = this.inputElement.checked;
+    this.handleInputChange();
     this.inputElement.addEventListener("change", this.handleInputChange);
   }
 
@@ -45,6 +53,15 @@ class AppPasswordFormCheckbox extends HTMLElement {
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     switch (name) {
       case "checked":
+        const customEvent = new CustomEvent("update-form-input", {
+          bubbles: true,
+          composed: true,
+          detail: {
+            name: this.name,
+            value: newValue,
+          },
+        });
+        this.dispatchEvent(customEvent);
         break;
       default:
         throw new Error("The modified attribute is not observed");

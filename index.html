@@ -39,7 +39,7 @@
         width: 100%;
         max-width: 33.75rem;
       }
-      .title {
+      .app__title {
         margin-bottom: 1rem;
         text-align: center;
         font-size: 1rem;
@@ -47,9 +47,9 @@
         color: var(--color-grey);
       }
     </style>
-    <main class="container">
-      <h1 class="title">Password Generator</h1>
-      <app-password-display></app-password-display>
+    <main class="app">
+      <h1 class="app__title">Password Generator</h1>
+      <app-password-display id="display"></app-password-display>
       <app-password-form></app-password-form>
     </main>
   </template>
@@ -66,19 +66,19 @@
         padding-right: 1rem;
         background-color: var(--color-dark-grey);
       }
-      .container {
+      .display {
         display: flex;
         align-items: center;
         width: 100%;
         height: 100%;
       }
-      .password {
+      .display__password {
         flex: 1;
         font-size: 1.5rem;
         color: var(--color-almost-white);
         opacity: 0.25;
       }
-      .button {
+      .display__button {
         flex: none;
         margin-right: -0.875rem;
         display: flex;
@@ -88,17 +88,17 @@
         background-color: transparent;
         border: none;
       }
-      .icon {
+      .display__icon {
         margin: auto;
         width: auto;
         height: 1.25rem;
         color: var(--color-neon-green);
       }
     </style>
-    <div class="container">
-      <p class="password">P4$5W0rD!</p>
-      <button class="button">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 24" fill="currentColor">
+    <div class="display">
+      <p class="display__password">P4$5W0rD!</p>
+      <button class="display__button">
+        <svg class="display__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 24" fill="currentColor">
           <path d="M20.341 3.091 17.909.659A2.25 2.25 0 0 0 16.319 0H8.25A2.25 2.25 0 0 0 6 2.25V4.5H2.25A2.25 2.25 0 0 0 0 6.75v15A2.25 2.25 0 0 0 2.25 24h10.5A2.25 2.25 0 0 0 15 21.75V19.5h3.75A2.25 2.25 0 0 0 21 17.25V4.682a2.25 2.25 0 0 0-.659-1.591ZM12.469 21.75H2.53a.281.281 0 0 1-.281-.281V7.03a.281.281 0 0 1 .281-.281H6v10.5a2.25 2.25 0 0 0 2.25 2.25h4.5v1.969a.282.282 0 0 1-.281.281Zm6-4.5H8.53a.281.281 0 0 1-.281-.281V2.53a.281.281 0 0 1 .281-.281H13.5v4.125c0 .621.504 1.125 1.125 1.125h4.125v9.469a.282.282 0 0 1-.281.281Zm.281-12h-3v-3h.451c.075 0 .147.03.2.082L18.667 4.6a.283.283 0 0 1 .082.199v.451Z"/>
         </svg>
       </button>
@@ -139,19 +139,19 @@
         color: var(--color-dark-grey);
       }
     </style>
-    <form class="form">
-      <input class="input" type="hidden"/>
-      <input class="input" type="hidden"/>
-      <input class="input" type="hidden"/>
-      <input class="input" type="hidden"/>
-      <input class="input" type="hidden"/>
-      <app-password-form-range>Character Length</app-password-form-range>
-      <app-password-form-checkbox>Include Uppercase Letters</app-password-form-checkbox>
-      <app-password-form-checkbox>Include Lowercase Letters</app-password-form-checkbox>
-      <app-password-form-checkbox>Include Numbers</app-password-form-checkbox>
-      <app-password-form-checkbox>Include Symbols</app-password-form-checkbox>
+    <form class="form" id="form">
+      <input class="form__input" name="length" id="length" type="hidden"/>
+      <input class="form__input" name="uppercase" id="uppercase" type="hidden" value="false"/>
+      <input class="form__input" name="lowercase" id="lowercase" type="hidden" value="false"/>
+      <input class="form__input" name="numbers" id="numbers" type="hidden" value="false"/>
+      <input class="form__input" name="symbols" id="symbols" type="hidden" value="false"/>
+      <app-password-form-range name="length-ref">Character Length</app-password-form-range>
+      <app-password-form-checkbox name="uppercase-ref">Include Uppercase Letters</app-password-form-checkbox>
+      <app-password-form-checkbox name="lowercase-ref">Include Lowercase Letters</app-password-form-checkbox>
+      <app-password-form-checkbox name="numbers-ref">Include Numbers</app-password-form-checkbox>
+      <app-password-form-checkbox name="symbols-ref">Include Symbols</app-password-form-checkbox>
       <app-password-strength></app-password-strength>
-      <button class="button">
+      <button class="button" id="button" type="button">
         <span class="button__label">generate</span>
         <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="currentColor">
           <path d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z"/>
@@ -341,7 +341,7 @@
         height: auto;
         background-color: var(--color-very-dark-grey);
       }
-      .container {
+      .strength {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -350,14 +350,14 @@
         min-height: 3.5rem;
         padding: 0.5rem 1rem;
       }
-      .label {
+      .strength__title {
         margin-bottom: 1rem;
         margin-right: 1rem;
         font-size: 1rem;
         text-transform: uppercase;
         color: var(--color-grey);
       }
-      .strength {
+      .strength__row {
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -393,19 +393,19 @@
         background-color: var(--color-green);
       }
       @media screen and (min-width: 334px) {
-        .label {
+        .strength__title {
           margin-bottom: 0;
         }
       }
     </style>
-    <div class="container">
-      <p class="label">strength</p>
-      <div class="strength">
+    <div class="strength">
+      <p class="strength__title">strength</p>
+      <div class="strength__row">
         <p class="strength__value">medium</p>
         <div class="strength__bars">
-          <div class="strength__bar strength__bar--yellow"></div>
-          <div class="strength__bar strength__bar--yellow"></div>
-          <div class="strength__bar strength__bar--yellow"></div>
+          <div class="strength__bar"></div>
+          <div class="strength__bar"></div>
+          <div class="strength__bar"></div>
           <div class="strength__bar"></div>
         </div>
       </div>

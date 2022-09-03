@@ -7,7 +7,7 @@ class AppPasswordFormRange extends HTMLElement {
   thumbElement: HTMLDivElement;
 
   static get observedAttributes() {
-    return ["data-value"];
+    return ["value"];
   }
 
   constructor() {
@@ -23,12 +23,20 @@ class AppPasswordFormRange extends HTMLElement {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  get dataValue(): string {
-    return this.dataset.value || "12";
+  get name(): string {
+    return this.getAttribute("name") || "";
   }
 
-  set dataValue(newDataValue: string) {
-    this.dataset.value = newDataValue;
+  set name(newName: string) {
+    this.setAttribute("name", newName);
+  }
+
+  get value(): string {
+    return this.getAttribute("value") || "12";
+  }
+
+  set value(newDataValue: string) {
+    this.setAttribute("value", newDataValue);
   }
 
   connectedCallback() {
@@ -42,7 +50,7 @@ class AppPasswordFormRange extends HTMLElement {
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     switch (name) {
-      case "data-value":
+      case "value":
         const minValue = Number(this.inputElement.min);
         const maxValue = Number(this.inputElement.max);
         const currentValue = Number(newValue);
@@ -51,6 +59,15 @@ class AppPasswordFormRange extends HTMLElement {
         this.progressElement.style.width = ratio <= 0 ? "0" : `calc(${ratio}% + ${newPosition}px)`;
         this.thumbElement.style.left = `calc(${ratio}% + ${newPosition}px)`;
         this.maxLengthElement.textContent = newValue;
+        const customEvent = new CustomEvent("update-form-input", {
+          bubbles: true,
+          composed: true,
+          detail: {
+            name: this.name,
+            value: newValue,
+          },
+        });
+        this.dispatchEvent(customEvent);
         break;
       default:
         throw new Error("The modified attribute is not observed");
@@ -58,7 +75,7 @@ class AppPasswordFormRange extends HTMLElement {
   }
 
   handleInputChange() {
-    this.dataValue = this.inputElement.value;
+    this.value = this.inputElement.value;
   }
 }
 
