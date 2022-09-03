@@ -128,18 +128,27 @@
         height: 3.5rem;
         padding: 0;
         background-color: var(--color-neon-green);
+        color: var(--color-dark-grey);
         border: none;
+        cursor: pointer;
+      }
+      .button:disabled {
+        background-color: var(--color-very-dark-grey);
+        color: var(--color-grey);
+      }
+      .button:not(:disabled):hover {
+        background-color: transparent;
+        color: var(--color-neon-green);
+        border: 0.125rem solid var(--color-neon-green);
       }
       .button__label {
         margin-right: 1rem;
         font-size: 1rem;
         text-transform: uppercase;
-        color: var(--color-dark-grey);
       }
       .button__icon {
         width: 0.75rem;
         height: 0.75rem;
-        color: var(--color-dark-grey);
       }
     </style>
     <form class="form" id="form">
