@@ -17,27 +17,28 @@ class AppPasswordFormCheckbox extends HTMLElement {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  get name(): string {
-    return this.getAttribute("name") || "";
+  get name(): string | null {
+    return this.getAttribute("name");
   }
 
-  set name(newName: string) {
-    this.setAttribute("name", newName);
+  set name(newName: string | null) {
+    const hasName = newName !== null;
+    if (hasName) {
+      this.setAttribute("name", newName);
+    } else {
+      this.removeAttribute("name");
+    }
   }
 
   get checked(): boolean {
-    return this.getAttribute("checked") !== null;
+    return this.hasAttribute("checked");
   }
 
   set checked(isChecked: boolean) {
-    if (typeof isChecked === "boolean") {
-      if (isChecked) {
-        this.setAttribute("checked", "");
-      } else {
-        this.removeAttribute("checked");
-      }
+    if (isChecked) {
+      this.setAttribute("checked", "");
     } else {
-      throw new Error("The new checked state is not valid");
+      this.removeAttribute("checked");
     }
   }
 
@@ -50,7 +51,7 @@ class AppPasswordFormCheckbox extends HTMLElement {
     this.inputElement.removeEventListener("change", this.handleInputChange);
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
     switch (name) {
       case "checked":
         const customEvent = new CustomEvent("update-form-input", {

@@ -16,27 +16,37 @@ class AppPasswordFormRange extends HTMLElement {
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.adoptedStyleSheets = [resetSheet];
     shadowRoot.append(template.content.cloneNode(true));
-    this.maxLengthElement = <HTMLParagraphElement>shadowRoot.querySelector(".range__max-length");
-    this.inputElement = <HTMLInputElement>shadowRoot.querySelector(".range__input");
-    this.progressElement = <HTMLDivElement>shadowRoot.querySelector(".range__progress");
-    this.thumbElement = <HTMLDivElement>shadowRoot.querySelector(".range__thumb");
+    this.maxLengthElement = <HTMLParagraphElement>shadowRoot.querySelector("#length");
+    this.inputElement = <HTMLInputElement>shadowRoot.querySelector("#input");
+    this.progressElement = <HTMLDivElement>shadowRoot.querySelector("#progress");
+    this.thumbElement = <HTMLDivElement>shadowRoot.querySelector("#thumb");
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  get name(): string {
-    return this.getAttribute("name") || "";
+  get name(): string | null {
+    return this.getAttribute("name");
   }
 
-  set name(newName: string) {
-    this.setAttribute("name", newName);
+  set name(newName: string | null) {
+    const hasName = newName !== null;
+    if (hasName) {
+      this.setAttribute("name", newName);
+    } else {
+      this.removeAttribute("name");
+    }
   }
 
-  get value(): string {
-    return this.getAttribute("value") || "12";
+  get value(): string | null {
+    return this.getAttribute("value");
   }
 
-  set value(newDataValue: string) {
-    this.setAttribute("value", newDataValue);
+  set value(newValue: string | null) {
+    const hasValue = newValue !== null;
+    if (hasValue) {
+      this.setAttribute("value", newValue);
+    } else {
+      this.removeAttribute("value");
+    }
   }
 
   connectedCallback() {
@@ -48,12 +58,14 @@ class AppPasswordFormRange extends HTMLElement {
     this.inputElement.removeEventListener("input", this.handleInputChange);
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
     switch (name) {
+      case "name":
+        break;
       case "value":
         const minValue = Number(this.inputElement.min);
         const maxValue = Number(this.inputElement.max);
-        const currentValue = Number(newValue);
+        const currentValue = newValue !== null ? Number(newValue) : 0;
         const ratio = ((currentValue - minValue) * 100) / (maxValue - minValue);
         const newPosition = ratio === 50 ? 0 : 14 - (ratio * 0.28);
         this.progressElement.style.width = ratio <= 0 ? "0" : `calc(${ratio}% + ${newPosition}px)`;

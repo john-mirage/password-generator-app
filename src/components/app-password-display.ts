@@ -4,7 +4,7 @@ class AppPasswordDisplay extends HTMLElement {
   passwordElement: HTMLParagraphElement;
 
   static get observedAttributes() {
-    return ["value"];
+    return ["password"];
   }
 
   constructor() {
@@ -16,19 +16,26 @@ class AppPasswordDisplay extends HTMLElement {
     this.passwordElement = <HTMLParagraphElement>shadowRoot.querySelector("#password");
   }
 
-  get value(): string {
-    return this.getAttribute("value") || "P4$5W0rD!";
+  get password(): string | null {
+    return this.getAttribute("password");
   }
 
-  set value(newValue: string) {
-    this.setAttribute("value", newValue);
-    this.passwordElement.classList.add("display__password--generated");
+  set password(newPassword: string | null) {
+    const hasPassword = newPassword !== null;
+    if (hasPassword) {
+      this.setAttribute("password", newPassword);
+    } else {
+      this.removeAttribute("password");
+    }
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
     switch (name) {
-      case "value":
+      case "password":
         this.passwordElement.textContent = newValue;
+        if (!this.passwordElement.classList.contains("display__password--generated")) {
+          this.passwordElement.classList.add("display__password--generated");
+        }
         break;
       default:
         throw new Error("The modified attribute is not observed");

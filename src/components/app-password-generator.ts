@@ -7,6 +7,10 @@ const symbolDatabase = "&é(-è_çà)=$ù%";
 
 class AppPasswordGenerator extends HTMLElement {
   displayElement: AppPasswordDisplay;
+
+  static get observedAttributes() {
+    return ["password"];
+  }
   
   constructor() {
     super();
@@ -18,12 +22,35 @@ class AppPasswordGenerator extends HTMLElement {
     this.handleGeneratePassword = this.handleGeneratePassword.bind(this);
   }
 
+  get password(): string | null {
+    return this.getAttribute("password");
+  }
+
+  set password(newPassword: string | null) {
+    const hasPassword = newPassword !== null;
+    if (hasPassword) {
+      this.setAttribute("password", newPassword);
+    } else {
+      this.removeAttribute("password");
+    }
+  }
+
   connectedCallback() {
     this.addEventListener("generate-password", this.handleGeneratePassword);
   }
 
   disconnectedCallback() {
     this.removeEventListener("generate-password", this.handleGeneratePassword);
+  }
+
+  attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
+    switch (name) {
+      case "password":
+        this.displayElement.password = newValue;
+        break;
+      default:
+        throw new Error("The modified attribute is not observed");
+    }
   }
 
   handleGeneratePassword(event: Event) {
@@ -43,13 +70,11 @@ class AppPasswordGenerator extends HTMLElement {
     if (hasLowercase) database += alphaDatabase.toLowerCase();
     if (hasNumbers) database += numberDatabase;
     if (hasSymbols) database += symbolDatabase;
-    console.log("generate...");
     let password = "";
     for (let index = 0; index < length; ++index) {
       password += database.charAt(Math.random() * database.length);
     }
-    console.log(password);
-    this.displayElement.value = password;
+    this.password = password;
   }
 }
 

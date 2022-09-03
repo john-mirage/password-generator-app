@@ -8,6 +8,10 @@ class AppPasswordForm extends HTMLElement {
   lowercaseInputElement: HTMLInputElement;
   numbersInputElement: HTMLInputElement;
   symbolsInputElement: HTMLInputElement;
+
+  static get observedAttributes() {
+    return ["disabled"];
+  }
   
   constructor() {
     super();
@@ -26,8 +30,20 @@ class AppPasswordForm extends HTMLElement {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  get disabled(): boolean {
+    return this.hasAttribute("disabled");
+  }
+
+  set disabled(isDisabled: boolean) {
+    if (isDisabled) {
+      this.setAttribute("disabled", "");
+    } else {
+      this.removeAttribute("disabled");
+    }
+  } 
+
   connectedCallback() {
-    this.handleButton();
+    this.disabled = !this.formIsValid();
     this.addEventListener("update-form-input", this.handleInput);
     this.buttonElement.addEventListener("click", this.handleSubmit);
   }
@@ -37,6 +53,21 @@ class AppPasswordForm extends HTMLElement {
     this.buttonElement.removeEventListener("click", this.handleSubmit);
   }
 
+  attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
+    switch (name) {
+      case "disabled":
+        const isDisabled = newValue !== null;
+        if (isDisabled) {
+          this.buttonElement.setAttribute("disabled", "");
+        } else {
+          this.buttonElement.removeAttribute("disabled");
+        }
+        break;
+      default:
+        throw new Error("The modified attribute is not observed");
+    }
+  }
+
   handleInput(event: Event) {
     const { name, value } = (<CustomEvent>event).detail;
     switch (name) {
@@ -44,43 +75,39 @@ class AppPasswordForm extends HTMLElement {
         this.lengthInputElement.value = value;
         break;
       case "uppercase-ref":
-        this.uppercaseInputElement.value = String(value !== null);
+        this.uppercaseInputElement.checked = value !== null;
         break;
       case "lowercase-ref":
-        this.lowercaseInputElement.value = String(value !== null);
+        this.lowercaseInputElement.checked = value !== null;
         break;
       case "numbers-ref":
-        this.numbersInputElement.value = String(value !== null);
+        this.numbersInputElement.checked = value !== null;
         break;
       case "symbols-ref":
-        this.symbolsInputElement.value = String(value !== null);
+        this.symbolsInputElement.checked = value !== null;
         break;
       default:
         throw new Error("The name is not valid");
     }
-    this.handleButton();
+    this.disabled = !this.formIsValid();
   }
 
-  handleButton() {
+  formIsValid(): boolean {
     const formData = new FormData(this.formElement);
-    const hasUppercase = formData.get("uppercase") === "true";
-    const hasLowercase = formData.get("lowercase") === "true";
-    const hasNumbers = formData.get("numbers") === "true";
-    const hasSymbols = formData.get("symbols") === "true";
-    if (hasUppercase || hasLowercase || hasNumbers || hasSymbols) {
-      this.buttonElement.removeAttribute("disabled");
-    } else {
-      this.buttonElement.setAttribute("disabled", "");
-    }
+    const hasUppercase = formData.get("uppercase") !== null;
+    const hasLowercase = formData.get("lowercase") !== null;
+    const hasNumbers = formData.get("numbers") !== null;
+    const hasSymbols = formData.get("symbols") !== null;
+    return hasUppercase || hasLowercase || hasNumbers || hasSymbols;
   }
 
   handleSubmit() {
     const formData = new FormData(this.formElement);
     const length = Number(formData.get("length"));
-    const hasUppercase = formData.get("uppercase") === "true";
-    const hasLowercase = formData.get("lowercase") === "true";
-    const hasNumbers = formData.get("numbers") === "true";
-    const hasSymbols = formData.get("symbols") === "true";
+    const hasUppercase = formData.get("uppercase") !== null;
+    const hasLowercase = formData.get("lowercase") !== null;
+    const hasNumbers = formData.get("numbers") !== null;
+    const hasSymbols = formData.get("symbols") !== null;
     const customEvent = new CustomEvent("generate-password", {
       bubbles: true,
       composed: true,
