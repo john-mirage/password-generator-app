@@ -138,6 +138,7 @@
       .button:disabled {
         background-color: var(--color-very-dark-grey);
         color: var(--color-grey);
+        cursor: default;
       }
       .button:not(:disabled):hover {
         background-color: transparent;
@@ -165,7 +166,7 @@
       <app-password-form-checkbox name="lowercase-ref">Include Lowercase Letters</app-password-form-checkbox>
       <app-password-form-checkbox name="numbers-ref">Include Numbers</app-password-form-checkbox>
       <app-password-form-checkbox name="symbols-ref">Include Symbols</app-password-form-checkbox>
-      <app-password-strength value=""></app-password-strength>
+      <app-password-strength strength="strong"></app-password-strength>
       <button class="button" id="button" type="button">
         <span class="button__label">generate</span>
         <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="currentColor">
@@ -398,13 +399,17 @@
         border: none;
         background-color: var(--color-red);
       }
+      .strength__bar--orange {
+        border: none;
+        background-color: var(--color-orange);
+      }
       .strength__bar--yellow {
         border: none;
         background-color: var(--color-yellow);
       }
       .strength__bar--green {
         border: none;
-        background-color: var(--color-green);
+        background-color: var(--color-neon-green);
       }
       @media screen and (min-width: 334px) {
         .strength__title {
@@ -416,7 +421,7 @@
       <p class="strength__title">strength</p>
       <div class="strength__row">
         <p class="strength__value" id="strength"></p>
-        <div class="strength__bars">
+        <div class="strength__bars" id="bars">
           <div class="strength__bar"></div>
           <div class="strength__bar"></div>
           <div class="strength__bar"></div>
