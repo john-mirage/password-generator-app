@@ -67,7 +67,7 @@ class AppPasswordForm extends HTMLElement {
     const hasLowercase = formData.get("lowercase") === "true";
     const hasNumbers = formData.get("numbers") === "true";
     const hasSymbols = formData.get("symbols") === "true";
-    if (hasUppercase && hasLowercase && hasNumbers && hasSymbols) {
+    if (hasUppercase || hasLowercase || hasNumbers || hasSymbols) {
       this.buttonElement.removeAttribute("disabled");
     } else {
       this.buttonElement.setAttribute("disabled", "");
