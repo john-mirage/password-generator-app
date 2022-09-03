@@ -89,13 +89,17 @@
         height: 3rem;
         padding: 0;
         background-color: transparent;
+        color: var(--color-neon-green);
         border: none;
+        cursor: pointer;
+      }
+      .display__button:hover {
+        color: var(--color-almost-white);
       }
       .display__icon {
         margin: auto;
         width: auto;
         height: 1.25rem;
-        color: var(--color-neon-green);
       }
     </style>
     <div class="display">
@@ -166,7 +170,7 @@
       <app-password-form-checkbox name="lowercase-ref">Include Lowercase Letters</app-password-form-checkbox>
       <app-password-form-checkbox name="numbers-ref">Include Numbers</app-password-form-checkbox>
       <app-password-form-checkbox name="symbols-ref">Include Symbols</app-password-form-checkbox>
-      <app-password-strength strength="strong"></app-password-strength>
+      <app-password-strength></app-password-strength>
       <button class="button" id="button" type="button">
         <span class="button__label">generate</span>
         <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="currentColor">
@@ -261,6 +265,10 @@
         border-radius: 9999px;
         background-color: var(--color-grey);
         transform: translateX(-50%);
+      }
+      .range__input:hover ~ .range__thumb {
+        border: 0.125rem solid var(--color-neon-green);
+        background-color: var(--color-very-dark-grey);
       }
       .range__progress {
         position: absolute;
