@@ -92,26 +92,26 @@ class AppPasswordForm extends HTMLElement {
     this.disabled = !this.formIsValid();
   }
 
-  formIsValid(): boolean {
-    const formData = new FormData(this.formElement);
-    const hasUppercase = formData.get("uppercase") !== null;
-    const hasLowercase = formData.get("lowercase") !== null;
-    const hasNumbers = formData.get("numbers") !== null;
-    const hasSymbols = formData.get("symbols") !== null;
-    return hasUppercase || hasLowercase || hasNumbers || hasSymbols;
-  }
-
-  handleSubmit() {
+  getFormData() {
     const formData = new FormData(this.formElement);
     const length = Number(formData.get("length"));
     const hasUppercase = formData.get("uppercase") !== null;
     const hasLowercase = formData.get("lowercase") !== null;
     const hasNumbers = formData.get("numbers") !== null;
     const hasSymbols = formData.get("symbols") !== null;
+    return { length, hasUppercase, hasLowercase, hasNumbers, hasSymbols };
+  }
+
+  formIsValid(): boolean {
+    const { length, hasUppercase, hasLowercase, hasNumbers, hasSymbols } = this.getFormData();
+    return length > 0 && (hasUppercase || hasLowercase || hasNumbers || hasSymbols);
+  }
+
+  handleSubmit() {
     const customEvent = new CustomEvent("generate-password", {
       bubbles: true,
       composed: true,
-      detail: { length, hasUppercase, hasLowercase, hasNumbers, hasSymbols },
+      detail: this.getFormData(),
     });
     this.dispatchEvent(customEvent);
   }
