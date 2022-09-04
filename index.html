@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABO1BMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////l9Pff8fS54ein2eOn2eL9/v684unr9vj7/f7c8PSl2eKHzNil2OLv+Prz+vue1eB3xdOq2uPm9Pf29/vy8/n3/Py13+eEyteZ097P6u/2+/zByeKOm8r8/f7u+Pq+4+qOz9uU0dzo9fjb4O5meLbh5fH0+vvV7fHx+fv8/P2Gk8Wbps+44eim2eLW2+xkdrXO1Oit3OWttthperja3u7u+Pn6+/2hrNJneLfFy+P7+/23v92IlcbN0ufx8/nj5/Kbp9BsfbltfrqAj8ORnsvg5PD+/v/v8ffQ1em0vduqtNfn6vS/61TcAAAAHHRSTlMAAAQqbK3Z8v0DN5ff+xqJ6jbC/kHBAjjp3qz8qSKHsgAAAAFiS0dEAf8CLd4AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfiChMPAx5FOtlkAAABSUlEQVQ4y4WTZ2OCMBCGc4IMEXAPjB10771t7dLuXbv3/v+/oNigIYjN+4HcJU9CcgMhVxASxLAkK4oshUUhBIgVqBEtqmNXelSLqF4EwDBjmFHMNADoejyRxD4lE/EGAZCScICkFCGc/YHrDkHOACON2yhtOABkTNxWZgYQZHPeqWKH18tlAakas6ezi3E1FQl5Fuhm3LyARD0AsIs9vSSmIrJwC9DXPzA4NEx8C0ktwMjo2PiE3YgFkokxOdUEpmdm5+YXXEBGCjEWl5bpHVZKq2tlMq+gAjHWNza9r9jarpD5QuMX1Z3dv3Fvn72T3LzkweFRfSgd+xJGn3lyeuZ8K+csYNFAXVzWrqr+bDmBoqG+vqnd3t3bDOCE2push8en55fXNzZZTLrfPz6/vn+oX083t2C4JccvWm7Z8xuH33r85v2v/X8Bp/FiyVLnL/0AAAAldEVYdGRhdGU6Y3JlYXRlADIwMTgtMTAtMTlUMTU6MDM6MzArMDI6MDCzEaEaAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE4LTEwLTE5VDE1OjAzOjMwKzAyOjAwwkwZpgAAAFd6VFh0UmF3IHByb2ZpbGUgdHlwZSBpcHRjAAB4nOPyDAhxVigoyk/LzEnlUgADIwsuYwsTIxNLkxQDEyBEgDTDZAMjs1Qgy9jUyMTMxBzEB8uASKBKLgDqFxF08kI1lQAAAABJRU5ErkJggg==" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Primary Meta Tags -->
+  <title>Password generator app</title>
+  <meta name="title" content="Password generator app">
+  <meta name="description" content="With password generator app, generate strong and reliable passwords !">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://john-mirage.github.io/">
+  <meta property="og:title" content="Password generator app">
+  <meta property="og:description" content="With password generator app, generate strong and reliable passwords !">
+  <meta property="og:image" content="https://john-mirage.github.io/password-generator-app/">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://john-mirage.github.io/">
+  <meta property="twitter:title" content="Password generator app">
+  <meta property="twitter:description" content="With password generator app, generate strong and reliable passwords !">
+  <meta property="twitter:image" content="https://john-mirage.github.io/password-generator-app/">
+  <script type="module" crossorigin src="/password-generator-app/assets/index.dbb631c8.js"></script>
+  <link rel="stylesheet" href="/password-generator-app/assets/index.f9a3c0eb.css">
+</head>
+
+<body class="page">
+  <!-- app -->
+  <app-password-generator></app-password-generator>
+
+  <!-- template | app password generator -->
+  <template id="template-app-password-generator">
+    <style>
+      :host {
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        max-width: 33.75rem;
+      }
+      .app {
+        width: 100%;
+        height: auto;
+      }
+      .app__title {
+        margin-bottom: 1rem;
+        text-align: center;
+        font-size: 1rem;
+        line-height: 1.3125rem;
+        color: var(--color-grey);
+      }
+      @media screen and (min-width: 540px) {
+        .app__title {
+          margin-bottom: 2rem;
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+    <main class="app">
+      <h1 class="app__title">Password Generator</h1>
+      <app-password-display id="display"></app-password-display>
+      <app-password-form id="form"></app-password-form>
+    </main>
+  </template>
+
+  <!-- template | app password display -->
+  <template id="template-app-password-display">
+    <style>
+      :host {
+        box-sizing: border-box;
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .display {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 4rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        background-color: var(--color-dark-grey);
+      }
+      .display__password {
+        flex: 1;
+        font-size: 1.5rem;
+        color: var(--color-almost-white);
+        opacity: 0.25;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .display__password--generated {
+        opacity: 1;
+      }
+      .display__info {
+        margin-left: 0.5rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+      }
+      .display__info--success {
+        color: var(--color-neon-green);
+      }
+      .display__info--error {
+        color: var(--color-red);
+      }
+      .display__button {
+        flex: none;
+        margin-right: -0.75rem;
+        display: flex;
+        width: 3rem;
+        height: 3rem;
+        padding: 0;
+        background-color: transparent;
+        color: var(--color-neon-green);
+        border: none;
+        cursor: pointer;
+      }
+      .display__button:disabled {
+        color: var(--color-grey);
+        cursor: default;
+      }
+      .display__button:not(:disabled):hover {
+        color: var(--color-almost-white);
+      }
+      .display__icon {
+        margin: auto;
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+      @media screen and (min-width: 540px) {
+        :host {
+          margin-bottom: 1.5rem;
+        }
+        .display {
+          height: 5rem;
+          padding-left: 2rem;
+          padding-right: 2rem;
+        }
+        .display__password {
+          font-size: 2rem;
+        }
+        .display__info {
+          font-size: 1.125rem;
+        }
+        .display__icon {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+    </style>
+    <div class="display" id="display">
+      <p class="display__password" id="password">P4$5W0rD!</p>
+      <button class="display__button" id="button" disabled>
+        <svg class="display__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 24" fill="currentColor">
+          <path d="M20.341 3.091 17.909.659A2.25 2.25 0 0 0 16.319 0H8.25A2.25 2.25 0 0 0 6 2.25V4.5H2.25A2.25 2.25 0 0 0 0 6.75v15A2.25 2.25 0 0 0 2.25 24h10.5A2.25 2.25 0 0 0 15 21.75V19.5h3.75A2.25 2.25 0 0 0 21 17.25V4.682a2.25 2.25 0 0 0-.659-1.591ZM12.469 21.75H2.53a.281.281 0 0 1-.281-.281V7.03a.281.281 0 0 1 .281-.281H6v10.5a2.25 2.25 0 0 0 2.25 2.25h4.5v1.969a.282.282 0 0 1-.281.281Zm6-4.5H8.53a.281.281 0 0 1-.281-.281V2.53a.281.281 0 0 1 .281-.281H13.5v4.125c0 .621.504 1.125 1.125 1.125h4.125v9.469a.282.282 0 0 1-.281.281Zm.281-12h-3v-3h.451c.075 0 .147.03.2.082L18.667 4.6a.283.283 0 0 1 .082.199v.451Z"/>
+        </svg>
+      </button>
+    </div>
+  </template>
+
+  <!-- template | app password form -->
+  <template id="template-app-password-form">
+    <style>
+      :host {
+        box-sizing: border-box;
+        display: block;
+      }
+      .form {
+        padding: 1rem;
+        background-color: var(--color-dark-grey);
+      }
+      .form__input {
+        display: none;
+      }
+      .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 3.5rem;
+        padding: 0;
+        background-color: var(--color-neon-green);
+        color: var(--color-dark-grey);
+        border: none;
+        cursor: pointer;
+      }
+      .button:disabled {
+        background-color: var(--color-very-dark-grey);
+        color: var(--color-grey);
+        cursor: default;
+      }
+      .button:not(:disabled):hover {
+        background-color: transparent;
+        color: var(--color-neon-green);
+        border: 0.125rem solid var(--color-neon-green);
+      }
+      .button__label {
+        margin-right: 1rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+      }
+      .button__icon {
+        width: 0.75rem;
+        height: 0.75rem;
+      }
+      @media screen and (min-width: 540px) {
+        .form {
+          padding: 1.5rem 2rem;
+        }
+        .button {
+          height: 4rem;
+        }
+        .button__label {
+          font-size: 1.125rem;
+        }
+      }
+    </style>
+    <form class="form" id="form">
+      <input class="form__input" name="length" id="length" type="hidden"/>
+      <input class="form__input" name="uppercase" id="uppercase" type="checkbox"/>
+      <input class="form__input" name="lowercase" id="lowercase" type="checkbox"/>
+      <input class="form__input" name="numbers" id="numbers" type="checkbox"/>
+      <input class="form__input" name="symbols" id="symbols" type="checkbox"/>
+      <app-password-form-range name="length-ref">Character Length</app-password-form-range>
+      <app-password-form-checkbox name="uppercase-ref">Include Uppercase Letters</app-password-form-checkbox>
+      <app-password-form-checkbox name="lowercase-ref">Include Lowercase Letters</app-password-form-checkbox>
+      <app-password-form-checkbox name="numbers-ref">Include Numbers</app-password-form-checkbox>
+      <app-password-form-checkbox name="symbols-ref">Include Symbols</app-password-form-checkbox>
+      <app-password-strength id="strength"></app-password-strength>
+      <button class="button" id="button" type="button">
+        <span class="button__label">generate</span>
+        <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="currentColor">
+          <path d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z"/>
+        </svg>
+      </button>
+    </form>
+  </template>
+
+  <!-- template | app password form range -->
+  <template id="template-app-password-form-range">
+    <style>
+      :host {
+        --thumb-size: 1.75rem;
+        box-sizing: border-box;
+        display: block;
+        margin-bottom: 2.5rem;
+      }
+      .range {
+        width: 100%;
+        height: auto;
+      }
+      .range__row {
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .range__title {
+        font-size: 1rem;
+        color: var(--color-almost-white);
+      }
+      .range__max-length {
+        font-size: 1.5rem;
+        color: var(--color-neon-green);
+      }
+      .range__track {
+        position: relative;
+        width: 100%;
+        height: 0.5rem;
+        background-color: var(--color-very-dark-grey);
+      }
+      .range__input {
+        margin: 0;
+        position: absolute;
+        z-index: 100;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: translateY(-50%);
+        opacity: 0.5;
+        -webkit-appearance: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      .range__input:focus {
+        outline: none;
+      }
+      .range__input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+      }
+      .range__input::-ms-track {
+        width: 100%;
+        cursor: pointer;
+        background: transparent; 
+        border-color: transparent;
+        color: transparent;
+      }
+      .range__input::-webkit-slider-thumb {
+        width: var(--thumb-size);
+        height: var(--thumb-size);
+        border-radius: 9999px;
+      }
+      .range__input::-moz-range-thumb {
+        width: var(--thumb-size);
+        height: var(--thumb-size);
+        border-radius: 9999px;
+        background-color: transparent;
+      }
+      .range__input::-ms-thumb {
+        width: var(--thumb-size);
+        height: var(--thumb-size);
+        border-radius: 9999px;
+      }
+      .range__thumb {
+        position: absolute;
+        z-index: 20;
+        top: -0.625rem;
+        left: 0;
+        width: var(--thumb-size);
+        height: var(--thumb-size);
+        border-radius: 9999px;
+        background-color: var(--color-grey);
+        transform: translateX(-50%);
+      }
+      .range__input:hover ~ .range__thumb {
+        border: 0.125rem solid var(--color-neon-green);
+        background-color: var(--color-very-dark-grey);
+      }
+      .range__progress {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background-color: var(--color-neon-green);
+      }
+      @media screen and (min-width: 540px) {
+        .range__row {
+          margin-bottom: 1.5rem;
+        }
+        .range__title {
+          font-size: 1.125rem;
+        }
+        .range__max-length {
+          font-size: 2rem;
+        }
+      }
+    </style>
+    <div class="range">
+      <div class="range__row">
+        <p class="range__title"><slot></slot></p>
+        <p class="range__max-length" id="length"></p>
+      </div>
+      <div class="range__track">
+        <input class="range__input" id="input" type="range" min="0" max="20" value="10" step="1" />
+        <div class="range__thumb" id="thumb"></div>
+        <div class="range__progress" id="progress"></div>
+      </div>
+    </div>
+  </template>
+
+  <!-- template | app password form checkbox -->
+  <template id="template-app-password-form-checkbox">
+    <style>
+      :host {
+        box-sizing: border-box;
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .checkbox {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        cursor: pointer;
+      }
+      .checkbox__input {
+        display: none;
+      }
+      .checkbox__box {
+        margin-right: 1.25rem;
+        margin-left: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+        display: flex;
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 0.125rem solid var(--color-almost-white);
+      }
+      .checkbox__icon {
+        display: none;
+      }
+      .checkbox__label {
+        font-size: 1rem;
+        color: var(--color-almost-white);
+      }
+      .checkbox__input:checked ~ .checkbox__box {
+        border: none;
+        background-color: var(--color-neon-green);
+      }
+      .checkbox__input:checked ~ .checkbox__box > .checkbox__icon {
+        display: block;
+        margin: auto;
+        width: 0.875rem;
+        height: 0.875rem;
+        color: var(--color-very-dark-grey);
+      }
+      @media screen and (min-width: 540px) {
+        :host {
+          margin-bottom: 1.25rem;
+        }
+        .checkbox__label {
+          font-size: 1.125rem;
+        }
+      }
+    </style>
+    <label class="checkbox">
+      <input class="checkbox__input" type="checkbox" name="">
+      <span class="checkbox__box">
+        <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" stroke="currentColor">
+          <path stroke-width="3" fill="none" d="M1 5.607 4.393 9l8-8"/>
+        </svg>
+      </span>
+      <span class="checkbox__label">
+        <slot></slot>
+      </span>
+    </label>
+  </template>
+
+  <!-- template | app password strength -->
+  <template id="template-app-password-strength">
+    <style>
+      :host {
+        box-sizing: border-box;
+        display: block;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+      }
+      .strength {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+        min-height: 3.5rem;
+        padding: 0.5rem 1rem;
+        background-color: var(--color-very-dark-grey);
+      }
+      .strength__title {
+        margin-bottom: 1rem;
+        margin-right: 1rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        color: var(--color-grey);
+      }
+      .strength__row {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      .strength__value {
+        margin-right: 1rem;
+        font-size: 1.125rem;
+        text-transform: uppercase;
+        color: var(--color-almost-white);
+      }
+      .strength__bars {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+        width: 4rem;
+        height: 1.75rem;
+      }
+      .strength__bar {
+        width: 100%;
+        height: 100%;
+        border: 0.125rem solid var(--color-almost-white);
+      }
+      .strength__bar--red {
+        border: none;
+        background-color: var(--color-red);
+      }
+      .strength__bar--orange {
+        border: none;
+        background-color: var(--color-orange);
+      }
+      .strength__bar--yellow {
+        border: none;
+        background-color: var(--color-yellow);
+      }
+      .strength__bar--green {
+        border: none;
+        background-color: var(--color-neon-green);
+      }
+      @media screen and (min-width: 334px) {
+        .strength__title {
+          margin-bottom: 0;
+        }
+      }
+      @media screen and (min-width: 540px) {
+        :host {
+          margin-bottom: 2rem;
+        }
+        .strength {
+          min-height: 4.5rem;
+          padding: 0.5rem 2rem;
+        }
+        .strength__title {
+          font-size: 1.125rem;
+        }
+        .strength__value {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+    <div class="strength">
+      <p class="strength__title">strength</p>
+      <div class="strength__row">
+        <p class="strength__value" id="strength"></p>
+        <div class="strength__bars" id="bars">
+          <div class="strength__bar"></div>
+          <div class="strength__bar"></div>
+          <div class="strength__bar"></div>
+          <div class="strength__bar"></div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- module -->
+  
+</body>
+
+</html>
