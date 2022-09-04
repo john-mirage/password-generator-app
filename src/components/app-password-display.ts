@@ -2,6 +2,7 @@ import resetSheet from "@styles/reset";
 
 class AppPasswordDisplay extends HTMLElement {
   passwordElement: HTMLParagraphElement;
+  buttonElement: HTMLButtonElement;
 
   static get observedAttributes() {
     return ["password"];
@@ -14,6 +15,8 @@ class AppPasswordDisplay extends HTMLElement {
     shadowRoot.adoptedStyleSheets = [resetSheet];
     shadowRoot.append(template.content.cloneNode(true));
     this.passwordElement = <HTMLParagraphElement>shadowRoot.querySelector("#password");
+    this.buttonElement = <HTMLButtonElement>shadowRoot.querySelector("#button");
+    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   get password(): string | null {
@@ -29,6 +32,14 @@ class AppPasswordDisplay extends HTMLElement {
     }
   }
 
+  connectedCallback() {
+    this.buttonElement.addEventListener("click", this.handleButtonClick);
+  }
+
+  disconnectedCallback() {
+    this.buttonElement.removeEventListener("click", this.handleButtonClick);
+  }
+
   attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
     switch (name) {
       case "password":
@@ -42,6 +53,9 @@ class AppPasswordDisplay extends HTMLElement {
     }
   }
 
+  handleButtonClick() {
+    
+  }
 }
 
 export default AppPasswordDisplay;

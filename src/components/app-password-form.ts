@@ -1,4 +1,5 @@
 import resetSheet from "@styles/reset";
+import AppPasswordStrength from "@components/app-password-strength";
 
 class AppPasswordForm extends HTMLElement {
   formElement: HTMLFormElement;
@@ -8,9 +9,10 @@ class AppPasswordForm extends HTMLElement {
   lowercaseInputElement: HTMLInputElement;
   numbersInputElement: HTMLInputElement;
   symbolsInputElement: HTMLInputElement;
+  strengthElement: AppPasswordStrength;
 
   static get observedAttributes() {
-    return ["disabled"];
+    return ["disabled", "strength"];
   }
   
   constructor() {
@@ -26,6 +28,7 @@ class AppPasswordForm extends HTMLElement {
     this.lowercaseInputElement = <HTMLInputElement>shadowRoot.querySelector("#lowercase");
     this.numbersInputElement = <HTMLInputElement>shadowRoot.querySelector("#numbers");
     this.symbolsInputElement = <HTMLInputElement>shadowRoot.querySelector("#symbols");
+    this.strengthElement = <AppPasswordStrength>shadowRoot.querySelector("#strength");
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -40,7 +43,20 @@ class AppPasswordForm extends HTMLElement {
     } else {
       this.removeAttribute("disabled");
     }
-  } 
+  }
+
+  get strength(): string | null {
+    return this.getAttribute("strength");
+  }
+
+  set strength(newStrength: string | null) {
+    const hasStrength = newStrength !== null;
+    if (hasStrength) {
+      this.setAttribute("strength", newStrength);
+    } else {
+      this.removeAttribute("strength");
+    }
+  }
 
   connectedCallback() {
     this.disabled = !this.formIsValid();
@@ -62,6 +78,9 @@ class AppPasswordForm extends HTMLElement {
         } else {
           this.buttonElement.removeAttribute("disabled");
         }
+        break;
+      case "strength":
+        this.strengthElement.strength = newValue;
         break;
       default:
         throw new Error("The modified attribute is not observed");
