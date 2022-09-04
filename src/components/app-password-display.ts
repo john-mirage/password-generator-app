@@ -1,8 +1,10 @@
 import resetSheet from "@styles/reset";
 
 class AppPasswordDisplay extends HTMLElement {
+  displayElement: HTMLDivElement;
   passwordElement: HTMLParagraphElement;
   buttonElement: HTMLButtonElement;
+  infoElement: HTMLParagraphElement;
 
   static get observedAttributes() {
     return ["password"];
@@ -14,8 +16,11 @@ class AppPasswordDisplay extends HTMLElement {
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.adoptedStyleSheets = [resetSheet];
     shadowRoot.append(template.content.cloneNode(true));
+    this.displayElement = <HTMLDivElement>shadowRoot.querySelector("#display");
     this.passwordElement = <HTMLParagraphElement>shadowRoot.querySelector("#password");
     this.buttonElement = <HTMLButtonElement>shadowRoot.querySelector("#button");
+    this.infoElement = document.createElement("p");
+    this.infoElement.classList.add("display__info");
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
@@ -43,9 +48,16 @@ class AppPasswordDisplay extends HTMLElement {
   attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
     switch (name) {
       case "password":
-        this.passwordElement.textContent = newValue;
-        if (!this.passwordElement.classList.contains("display__password--generated")) {
+        const hasPassword = newValue !== null;
+        if (this.displayElement.contains(this.infoElement)) this.displayElement.removeChild(this.infoElement);
+        if (hasPassword) {
           this.passwordElement.classList.add("display__password--generated");
+          this.buttonElement.removeAttribute("disabled");
+          this.passwordElement.textContent = newValue;
+        } else {
+          this.passwordElement.classList.remove("display__password--generated");
+          this.buttonElement.setAttribute("disabled", "");
+          this.passwordElement.textContent = "P4$5W0rD!";
         }
         break;
       default:
@@ -54,7 +66,22 @@ class AppPasswordDisplay extends HTMLElement {
   }
 
   handleButtonClick() {
-    
+    const password = this.password;
+    if (password !== null) {
+      navigator.clipboard.writeText(password).then(() => {
+        if (!this.displayElement.contains(this.infoElement)) this.buttonElement.before(this.infoElement);
+        if (this.infoElement.textContent !== "copied") this.infoElement.textContent = "copied";
+        this.infoElement.classList.remove("display__info--error");
+        this.infoElement.classList.add("display__info--success");
+      }, () => {
+        if (!this.displayElement.contains(this.infoElement)) this.buttonElement.before(this.infoElement);
+        if (this.infoElement.textContent !== "error") this.infoElement.textContent = "error";
+        this.infoElement.classList.remove("display__info--success");
+        this.infoElement.classList.add("display__info--error");
+      });
+    } else {
+      throw new Error("No password has been set");
+    }
   }
 }
 
