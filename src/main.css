@@ -5,6 +5,12 @@
   src: url("/src/fonts/JetBrainsMono-Bold.woff2") format("woff2");
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
    --color-very-dark-grey: hsl(248, 15%, 11%);
    --color-dark-grey: hsl(247, 11%, 15%);
