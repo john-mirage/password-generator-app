@@ -1,5 +1,3 @@
-import resetSheet from "@styles/reset";
-
 class AppPasswordFormRange extends HTMLElement {
   maxLengthElement: HTMLParagraphElement;
   inputElement: HTMLInputElement;
@@ -14,7 +12,6 @@ class AppPasswordFormRange extends HTMLElement {
     super();
     const template = <HTMLTemplateElement>document.getElementById("template-app-password-form-range");
     const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.adoptedStyleSheets = [resetSheet];
     shadowRoot.append(template.content.cloneNode(true));
     this.maxLengthElement = <HTMLParagraphElement>shadowRoot.querySelector("#length");
     this.inputElement = <HTMLInputElement>shadowRoot.querySelector("#input");

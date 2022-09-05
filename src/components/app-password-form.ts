@@ -1,4 +1,3 @@
-import resetSheet from "@styles/reset";
 import AppPasswordStrength from "@components/app-password-strength";
 
 class AppPasswordForm extends HTMLElement {
@@ -19,7 +18,6 @@ class AppPasswordForm extends HTMLElement {
     super();
     const template = <HTMLTemplateElement>document.getElementById("template-app-password-form");
     const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.adoptedStyleSheets = [resetSheet];
     shadowRoot.append(template.content.cloneNode(true));
     this.formElement = <HTMLFormElement>shadowRoot.querySelector("#form");
     this.buttonElement = <HTMLButtonElement>shadowRoot.querySelector("#button");

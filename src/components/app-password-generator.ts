@@ -1,4 +1,3 @@
-import resetSheet from "@styles/reset";
 import AppPasswordDisplay from "@components/app-password-display";
 import AppPasswordForm from "@components/app-password-form";
 import { zxcvbn, zxcvbnOptions } from "@zxcvbn-ts/core";
@@ -33,7 +32,6 @@ class AppPasswordGenerator extends HTMLElement {
     super();
     const template = <HTMLTemplateElement>document.getElementById("template-app-password-generator");
     const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.adoptedStyleSheets = [resetSheet];
     shadowRoot.append(template.content.cloneNode(true));
     this.displayElement = <AppPasswordDisplay>shadowRoot.querySelector("#display");
     this.formElement = <AppPasswordForm>shadowRoot.querySelector("#form");

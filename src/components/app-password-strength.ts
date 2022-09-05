@@ -1,5 +1,3 @@
-import resetSheet from "@styles/reset";
-
 class AppPasswordStrength extends HTMLElement {
   strengthElement: HTMLParagraphElement;
   barsElement: HTMLDivElement;
@@ -25,7 +23,6 @@ class AppPasswordStrength extends HTMLElement {
     super();
     const template = <HTMLTemplateElement>document.getElementById("template-app-password-strength");
     const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.adoptedStyleSheets = [resetSheet];
     shadowRoot.append(template.content.cloneNode(true));
     this.strengthElement = <HTMLParagraphElement>shadowRoot.querySelector("#strength");
     this.barsElement = <HTMLDivElement>shadowRoot.querySelector("#bars");

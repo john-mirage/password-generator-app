@@ -1,5 +1,3 @@
-import resetSheet from "@styles/reset";
-
 class AppPasswordDisplay extends HTMLElement {
   displayElement: HTMLDivElement;
   passwordElement: HTMLParagraphElement;
@@ -14,7 +12,6 @@ class AppPasswordDisplay extends HTMLElement {
     super();
     const template = <HTMLTemplateElement>document.getElementById("template-app-password-display");
     const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.adoptedStyleSheets = [resetSheet];
     shadowRoot.append(template.content.cloneNode(true));
     this.displayElement = <HTMLDivElement>shadowRoot.querySelector("#display");
     this.passwordElement = <HTMLParagraphElement>shadowRoot.querySelector("#password");

@@ -1,14 +1,6 @@
-@import "styles/components/page.css";
-
 @font-face {
   font-family: "JetBrains Mono Bold";
   src: url("/src/fonts/JetBrainsMono-Bold.woff2") format("woff2");
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
 }
 
 :root {
@@ -22,7 +14,15 @@
    --color-red: hsl(0, 91%, 63%);
 }
 
-body {
+.page {
+  box-sizing: border-box;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 4rem 1rem;
+  background: linear-gradient(to bottom, hsl(248, 17%, 9%), hsl(255, 22%, 4%));
   font-family:
     "JetBrains Mono Bold",
     system-ui,
@@ -34,4 +34,8 @@ body {
 		sans-serif,
 		'Apple Color Emoji',
 		'Segoe UI Emoji';
+}
+
+.page__icons {
+  display: none;
 }

@@ -1,5 +1,3 @@
-import resetSheet from "@styles/reset";
-
 class AppPasswordFormCheckbox extends HTMLElement {
   inputElement: HTMLInputElement;
 
@@ -11,7 +9,6 @@ class AppPasswordFormCheckbox extends HTMLElement {
     super();
     const template = <HTMLTemplateElement>document.getElementById("template-app-password-form-checkbox");
     const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.adoptedStyleSheets = [resetSheet];
     shadowRoot.append(template.content.cloneNode(true));
     this.inputElement = <HTMLInputElement>shadowRoot.querySelector(".checkbox__input");
     this.handleInputChange = this.handleInputChange.bind(this);
