@@ -13,9 +13,9 @@ class AppPasswordDisplay extends HTMLElement {
     const template = <HTMLTemplateElement>document.getElementById("template-app-password-display");
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.append(template.content.cloneNode(true));
-    this.displayElement = <HTMLDivElement>shadowRoot.querySelector("#display");
-    this.passwordElement = <HTMLParagraphElement>shadowRoot.querySelector("#password");
-    this.buttonElement = <HTMLButtonElement>shadowRoot.querySelector("#button");
+    this.displayElement = <HTMLDivElement>shadowRoot.querySelector("#apd-display");
+    this.passwordElement = <HTMLParagraphElement>shadowRoot.querySelector("#apd-password");
+    this.buttonElement = <HTMLButtonElement>shadowRoot.querySelector("#apd-button");
     this.infoElement = document.createElement("p");
     this.infoElement.classList.add("display__info");
     this.handleButtonClick = this.handleButtonClick.bind(this);

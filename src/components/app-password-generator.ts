@@ -33,8 +33,8 @@ class AppPasswordGenerator extends HTMLElement {
     const template = <HTMLTemplateElement>document.getElementById("template-app-password-generator");
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.append(template.content.cloneNode(true));
-    this.displayElement = <AppPasswordDisplay>shadowRoot.querySelector("#display");
-    this.formElement = <AppPasswordForm>shadowRoot.querySelector("#form");
+    this.displayElement = <AppPasswordDisplay>shadowRoot.querySelector("#apg-display");
+    this.formElement = <AppPasswordForm>shadowRoot.querySelector("#apg-form");
     this.handleGeneratePassword = this.handleGeneratePassword.bind(this);
   }
 

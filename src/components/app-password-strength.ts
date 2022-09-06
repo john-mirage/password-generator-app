@@ -24,8 +24,8 @@ class AppPasswordStrength extends HTMLElement {
     const template = <HTMLTemplateElement>document.getElementById("template-app-password-strength");
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.append(template.content.cloneNode(true));
-    this.strengthElement = <HTMLParagraphElement>shadowRoot.querySelector("#strength");
-    this.barsElement = <HTMLDivElement>shadowRoot.querySelector("#bars");
+    this.strengthElement = <HTMLParagraphElement>shadowRoot.querySelector("#aps-strength");
+    this.barsElement = <HTMLDivElement>shadowRoot.querySelector("#aps-bars");
   }
 
   attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {

@@ -19,14 +19,14 @@ class AppPasswordForm extends HTMLElement {
     const template = <HTMLTemplateElement>document.getElementById("template-app-password-form");
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.append(template.content.cloneNode(true));
-    this.formElement = <HTMLFormElement>shadowRoot.querySelector("#form");
-    this.buttonElement = <HTMLButtonElement>shadowRoot.querySelector("#button");
-    this.lengthInputElement = <HTMLInputElement>shadowRoot.querySelector("#length");
-    this.uppercaseInputElement = <HTMLInputElement>shadowRoot.querySelector("#uppercase");
-    this.lowercaseInputElement = <HTMLInputElement>shadowRoot.querySelector("#lowercase");
-    this.numbersInputElement = <HTMLInputElement>shadowRoot.querySelector("#numbers");
-    this.symbolsInputElement = <HTMLInputElement>shadowRoot.querySelector("#symbols");
-    this.strengthElement = <AppPasswordStrength>shadowRoot.querySelector("#strength");
+    this.formElement = <HTMLFormElement>shadowRoot.querySelector("#apf-form");
+    this.buttonElement = <HTMLButtonElement>shadowRoot.querySelector("#apf-button");
+    this.lengthInputElement = <HTMLInputElement>shadowRoot.querySelector("#apf-length");
+    this.uppercaseInputElement = <HTMLInputElement>shadowRoot.querySelector("#apf-uppercase");
+    this.lowercaseInputElement = <HTMLInputElement>shadowRoot.querySelector("#apf-lowercase");
+    this.numbersInputElement = <HTMLInputElement>shadowRoot.querySelector("#apf-numbers");
+    this.symbolsInputElement = <HTMLInputElement>shadowRoot.querySelector("#apf-symbols");
+    this.strengthElement = <AppPasswordStrength>shadowRoot.querySelector("#apf-strength");
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }

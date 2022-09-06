@@ -13,10 +13,10 @@ class AppPasswordFormRange extends HTMLElement {
     const template = <HTMLTemplateElement>document.getElementById("template-app-password-form-range");
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.append(template.content.cloneNode(true));
-    this.maxLengthElement = <HTMLParagraphElement>shadowRoot.querySelector("#length");
-    this.inputElement = <HTMLInputElement>shadowRoot.querySelector("#input");
-    this.progressElement = <HTMLDivElement>shadowRoot.querySelector("#progress");
-    this.thumbElement = <HTMLDivElement>shadowRoot.querySelector("#thumb");
+    this.maxLengthElement = <HTMLParagraphElement>shadowRoot.querySelector("#apfr-length");
+    this.inputElement = <HTMLInputElement>shadowRoot.querySelector("#apfr-input");
+    this.progressElement = <HTMLDivElement>shadowRoot.querySelector("#apfr-progress");
+    this.thumbElement = <HTMLDivElement>shadowRoot.querySelector("#apfr-thumb");
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 

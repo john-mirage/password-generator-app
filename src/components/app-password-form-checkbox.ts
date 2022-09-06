@@ -10,7 +10,7 @@ class AppPasswordFormCheckbox extends HTMLElement {
     const template = <HTMLTemplateElement>document.getElementById("template-app-password-form-checkbox");
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.append(template.content.cloneNode(true));
-    this.inputElement = <HTMLInputElement>shadowRoot.querySelector(".checkbox__input");
+    this.inputElement = <HTMLInputElement>shadowRoot.querySelector("#apfc-input");
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 

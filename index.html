@@ -28,7 +28,10 @@
 
 <body class="page">
   <!-- app -->
-  <app-password-generator></app-password-generator>
+  <main class="page__app">
+    <h1 class="page__title">Password generetor app</h1>
+    <app-password-generator></app-password-generator>
+  </main>
 
   <!-- template | app password generator -->
   <template id="template-app-password-generator">
@@ -36,8 +39,6 @@
       :host {
         box-sizing: border-box;
         display: block;
-        width: 100%;
-        max-width: 33.75rem;
       }
       .app {
         width: 100%;
@@ -58,11 +59,11 @@
         }
       }
     </style>
-    <main class="app">
+    <div class="app">
       <h1 class="app__title">Password Generator</h1>
-      <app-password-display id="display"></app-password-display>
-      <app-password-form id="form"></app-password-form>
-    </main>
+      <app-password-display id="apg-display"></app-password-display>
+      <app-password-form id="apg-form"></app-password-form>
+    </div>
   </template>
 
   <!-- template | app password display -->
@@ -153,9 +154,9 @@
         }
       }
     </style>
-    <div class="display" id="display">
-      <p class="display__password" id="password">P4$5W0rD!</p>
-      <button class="display__button" id="button" disabled>
+    <div class="display" id="apd-display">
+      <p class="display__password" id="apd-password">P4$5W0rD!</p>
+      <button class="display__button" id="apd-button" disabled>
         <svg class="display__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 24" fill="currentColor">
           <path d="M20.341 3.091 17.909.659A2.25 2.25 0 0 0 16.319 0H8.25A2.25 2.25 0 0 0 6 2.25V4.5H2.25A2.25 2.25 0 0 0 0 6.75v15A2.25 2.25 0 0 0 2.25 24h10.5A2.25 2.25 0 0 0 15 21.75V19.5h3.75A2.25 2.25 0 0 0 21 17.25V4.682a2.25 2.25 0 0 0-.659-1.591ZM12.469 21.75H2.53a.281.281 0 0 1-.281-.281V7.03a.281.281 0 0 1 .281-.281H6v10.5a2.25 2.25 0 0 0 2.25 2.25h4.5v1.969a.282.282 0 0 1-.281.281Zm6-4.5H8.53a.281.281 0 0 1-.281-.281V2.53a.281.281 0 0 1 .281-.281H13.5v4.125c0 .621.504 1.125 1.125 1.125h4.125v9.469a.282.282 0 0 1-.281.281Zm.281-12h-3v-3h.451c.075 0 .147.03.2.082L18.667 4.6a.283.283 0 0 1 .082.199v.451Z"/>
         </svg>
@@ -221,19 +222,19 @@
         }
       }
     </style>
-    <form class="form" id="form">
-      <input class="form__input" name="length" id="length" type="hidden"/>
-      <input class="form__input" name="uppercase" id="uppercase" type="checkbox"/>
-      <input class="form__input" name="lowercase" id="lowercase" type="checkbox"/>
-      <input class="form__input" name="numbers" id="numbers" type="checkbox"/>
-      <input class="form__input" name="symbols" id="symbols" type="checkbox"/>
+    <form class="form" id="apf-form">
+      <input class="form__input" name="length" id="apf-length" type="hidden"/>
+      <input class="form__input" name="uppercase" id="apf-uppercase" type="checkbox"/>
+      <input class="form__input" name="lowercase" id="apf-lowercase" type="checkbox"/>
+      <input class="form__input" name="numbers" id="apf-numbers" type="checkbox"/>
+      <input class="form__input" name="symbols" id="apf-symbols" type="checkbox"/>
       <app-password-form-range name="length-ref">Character Length</app-password-form-range>
       <app-password-form-checkbox name="uppercase-ref">Include Uppercase Letters</app-password-form-checkbox>
       <app-password-form-checkbox name="lowercase-ref">Include Lowercase Letters</app-password-form-checkbox>
       <app-password-form-checkbox name="numbers-ref">Include Numbers</app-password-form-checkbox>
       <app-password-form-checkbox name="symbols-ref">Include Symbols</app-password-form-checkbox>
-      <app-password-strength id="strength"></app-password-strength>
-      <button class="button" id="button" type="button">
+      <app-password-strength id="apf-strength"></app-password-strength>
+      <button class="button" id="apf-button" type="button">
         <span class="button__label">generate</span>
         <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="currentColor">
           <path d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z"/>
@@ -361,12 +362,12 @@
     <div class="range">
       <div class="range__row">
         <p class="range__title"><slot></slot></p>
-        <p class="range__max-length" id="length"></p>
+        <p class="range__max-length" id="apfr-length"></p>
       </div>
       <div class="range__track">
-        <input class="range__input" id="input" type="range" min="0" max="20" value="10" step="1" />
-        <div class="range__thumb" id="thumb"></div>
-        <div class="range__progress" id="progress"></div>
+        <input class="range__input" id="apfr-input" type="range" min="0" max="20" value="10" step="1" />
+        <div class="range__thumb" id="apfr-thumb"></div>
+        <div class="range__progress" id="apfr-progress"></div>
       </div>
     </div>
   </template>
@@ -427,7 +428,7 @@
       }
     </style>
     <label class="checkbox">
-      <input class="checkbox__input" type="checkbox" name="">
+      <input class="checkbox__input" type="checkbox" id="apfc-input">
       <span class="checkbox__box">
         <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" stroke="currentColor">
           <path stroke-width="3" fill="none" d="M1 5.607 4.393 9l8-8"/>
@@ -533,8 +534,8 @@
     <div class="strength">
       <p class="strength__title">strength</p>
       <div class="strength__row">
-        <p class="strength__value" id="strength"></p>
-        <div class="strength__bars" id="bars">
+        <p class="strength__value" id="aps-strength"></p>
+        <div class="strength__bars" id="aps-bars">
           <div class="strength__bar"></div>
           <div class="strength__bar"></div>
           <div class="strength__bar"></div>
