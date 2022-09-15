@@ -1,5 +1,6 @@
 class AppPasswordFormCheckbox extends HTMLElement {
   inputElement: HTMLInputElement;
+  labelElement: HTMLLabelElement;
 
   static get observedAttributes() {
     return ["checked"];
@@ -11,6 +12,8 @@ class AppPasswordFormCheckbox extends HTMLElement {
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.append(template.content.cloneNode(true));
     this.inputElement = <HTMLInputElement>shadowRoot.querySelector("#apfc-input");
+    this.labelElement = <HTMLLabelElement>shadowRoot.querySelector("#apfc-label");
+    this.handleLabelKeydown = this.handleLabelKeydown.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
@@ -41,10 +44,12 @@ class AppPasswordFormCheckbox extends HTMLElement {
 
   connectedCallback() {
     this.handleInputChange();
+    this.labelElement.addEventListener("keydown", this.handleLabelKeydown);
     this.inputElement.addEventListener("change", this.handleInputChange);
   }
 
   disconnectedCallback() {
+    this.labelElement.removeEventListener("keydown", this.handleLabelKeydown);
     this.inputElement.removeEventListener("change", this.handleInputChange);
   }
 
@@ -63,6 +68,13 @@ class AppPasswordFormCheckbox extends HTMLElement {
         break;
       default:
         throw new Error("The modified attribute is not observed");
+    }
+  }
+
+  handleLabelKeydown(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      this.inputElement.checked = !this.inputElement.checked;
+      this.handleInputChange();
     }
   }
 

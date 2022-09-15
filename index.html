@@ -191,6 +191,10 @@
         cursor: pointer;
         font-family: inherit;
       }
+      .button:focus-visible {
+        outline-offset: 0.5rem;
+        outline: 0.125rem solid var(--color-neon-green);
+      }
       .button:disabled {
         background-color: var(--color-very-dark-grey);
         color: var(--color-grey);
@@ -289,13 +293,14 @@
         width: 100%;
         height: 100%;
         transform: translateY(-50%);
-        opacity: 0.5;
+        opacity: 1;
         -webkit-appearance: none;
         background-color: transparent;
         cursor: pointer;
       }
       .range__input:focus {
-        outline: none;
+        outline-offset: 1rem;
+        outline: 0.125rem solid var(--color-neon-green);
       }
       .range__input::-webkit-slider-thumb {
         -webkit-appearance: none;
@@ -386,6 +391,10 @@
         align-items: center;
         cursor: pointer;
       }
+      .checkbox:focus {
+        outline-offset: 0.5rem;
+        outline: 0.125rem solid var(--color-neon-green);
+      }
       .checkbox__input {
         display: none;
       }
@@ -427,7 +436,7 @@
         }
       }
     </style>
-    <label class="checkbox">
+    <label class="checkbox" id="apfc-label" tabindex="0">
       <input class="checkbox__input" type="checkbox" id="apfc-input">
       <span class="checkbox__box">
         <svg class="checkbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" stroke="currentColor">
